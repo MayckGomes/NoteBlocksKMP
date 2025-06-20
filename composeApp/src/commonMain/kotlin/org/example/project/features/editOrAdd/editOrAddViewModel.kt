@@ -1,4 +1,4 @@
-package org.example.project.Screens.editOrAdd
+package org.example.project.features.editOrAdd
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

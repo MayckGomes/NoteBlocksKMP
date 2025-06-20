@@ -2,16 +2,16 @@ package org.example.project.navgation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import androidx.room.RoomDatabase
 import kotlinx.serialization.Serializable
-import org.example.project.Screens.editOrAdd.EditOrAddScreen
-import org.example.project.Screens.home.HomeScren
-import org.example.project.repostory.database.NoteDatabase
+import org.example.project.features.editOrAdd.EditOrAddScreen
+import org.example.project.features.home.HomeScren
 
 @Serializable
 object HomeRoute
@@ -33,18 +33,30 @@ fun Navgation() {
 
         enterTransition = {
             slideIntoContainer(
-                AnimatedContentTransitionScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Left, // entra da direita para a esquerda
+                animationSpec = tween(300)
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left, // sai para a esquerda
+                animationSpec = tween(300)
+            )
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right, // volta da esquerda para a direita
                 animationSpec = tween(300)
             )
         },
         popExitTransition = {
             slideOutOfContainer(
-                AnimatedContentTransitionScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right, // sai para a direita
                 animationSpec = tween(300)
             )
         }
 
-        ){
+    ){
 
         composable<HomeRoute> {
             HomeScren(navController)

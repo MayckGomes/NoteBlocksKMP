@@ -1,4 +1,4 @@
-package org.example.project.Screens.home
+package org.example.project.features.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,21 +22,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.room.RoomDatabase
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Plus
 import org.example.project.navgation.EditOrAddRoute
-import org.example.project.repostory.database.GetDatabaseBuilder
 import org.example.project.repostory.database.NoteDatabase
-import org.example.project.repostory.database.getRoomDatabase
 import org.example.project.repostory.useCase.getDataTime
 import org.example.project.theme.MyAppTheme
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScren(navController: NavController) {
 
-    val db = getRoomDatabase(GetDatabaseBuilder.getDB()!!).NoteDao()
+    val db = koinInject<NoteDatabase>().NoteDao()
 
     val lista = db.getAll().collectAsStateWithLifecycle(initialValue = emptyList()).value
 

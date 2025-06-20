@@ -56,13 +56,6 @@ abstract class NoteDatabase : RoomDatabase(){
 
 }
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<NoteDatabase> {
-
-    override fun initialize(): NoteDatabase
-
-}
-
 fun getRoomDatabase(
     builder: RoomDatabase.Builder<NoteDatabase>
 ): NoteDatabase {

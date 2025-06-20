@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App(getDatabaseBuilder(LocalContext.current))
+            App()
         }
     }
 }
@@ -23,5 +23,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App(getDatabaseBuilder(LocalContext.current))
+    App()
 }

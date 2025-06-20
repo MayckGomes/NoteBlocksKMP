@@ -1,18 +1,19 @@
 package org.example.project
 
 import androidx.compose.runtime.Composable
-import androidx.room.RoomDatabase
+import org.example.project.di.getKoinConfig
 import org.example.project.navgation.Navgation
-import org.example.project.repostory.database.GetDatabaseBuilder
-import org.example.project.repostory.database.NoteDatabase
+import org.koin.compose.KoinMultiplatformApplication
+import org.koin.core.annotation.KoinExperimentalAPI
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun App(databaseBuilder: RoomDatabase.Builder<NoteDatabase>) {
+fun App() {
 
-    val dbBuilder = GetDatabaseBuilder
-
-    dbBuilder.loadDatabasseBuilder(databaseBuilder)
-
-    Navgation()
+    KoinMultiplatformApplication(
+        config = getKoinConfig()
+    ){
+        Navgation()
+    }
 
 }

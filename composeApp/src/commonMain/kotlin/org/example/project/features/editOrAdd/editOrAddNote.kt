@@ -1,4 +1,4 @@
-package org.example.project.Screens.editOrAdd
+package org.example.project.features.editOrAdd
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,11 +39,12 @@ import compose.icons.feathericons.Delete
 import compose.icons.feathericons.Save
 import kotlinx.coroutines.launch
 import org.example.project.components.Dialog
-import org.example.project.repostory.database.GetDatabaseBuilder
 import org.example.project.repostory.database.Note
-import org.example.project.repostory.database.getRoomDatabase
+import org.example.project.repostory.database.NoteDatabase
+import org.example.project.repostory.database.noteDao
 import org.example.project.repostory.useCase.getDataTime
 import org.example.project.theme.MyAppTheme
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +53,7 @@ fun EditOrAddScreen(
     id: Int?
 ){
 
-    val db = getRoomDatabase(GetDatabaseBuilder.getDB()!!).NoteDao()
+    val db = koinInject<NoteDatabase>().NoteDao()
 
     val viewModel = viewModel{ editOrAddViewModel() }
 

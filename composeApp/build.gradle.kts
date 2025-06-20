@@ -25,7 +25,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "NoteApp"
             isStatic = true
 
         }
@@ -63,6 +63,11 @@ kotlin {
 
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
 
+            val koin_version = "4.1.0"
+
+            implementation("io.insert-koin:koin-compose:$koin_version")
+            implementation("io.insert-koin:koin-compose-viewmodel:$koin_version")
+            implementation("io.insert-koin:koin-compose-viewmodel-navigation:$koin_version")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -89,6 +94,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
