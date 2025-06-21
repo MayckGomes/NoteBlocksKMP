@@ -37,6 +37,7 @@ import compose.icons.FeatherIcons
 import compose.icons.feathericons.ArrowLeft
 import compose.icons.feathericons.Delete
 import compose.icons.feathericons.Save
+import compose.icons.feathericons.Trash
 import kotlinx.coroutines.launch
 import org.example.project.components.Dialog
 import org.example.project.repostory.database.Note
@@ -134,10 +135,13 @@ fun EditOrAddScreen(
                                 scope.launch {
 
                                     if (id == null){
-                                        db.addNote(Note(title = title, text = text, date = getDataTime()))
+
+                                        db.addNote(Note(title = title.ifEmpty { "Sem Titulo" }, text = text, date = getDataTime()))
+                                        navController.navigateUp()
+
                                     } else {
 
-                                        db.editNote(Note(id = id ,title = title, text = text, date = getDataTime()))
+                                        db.editNote(Note(id = id ,title = title.ifEmpty { "Sem Titulo" }, text = text, date = getDataTime()))
 
                                     }
 
@@ -159,7 +163,7 @@ fun EditOrAddScreen(
                             }){
 
                                 Icon(
-                                    imageVector = FeatherIcons.Delete,
+                                    imageVector = FeatherIcons.Trash,
                                     contentDescription = "delete",
                                     tint = MaterialTheme.colorScheme.onBackground
                                 )
@@ -190,10 +194,12 @@ fun EditOrAddScreen(
                             scope.launch {
 
                                 if (id == null){
-                                    db.addNote(Note(title = title, text = text, date = getDataTime()))
+
+                                    db.addNote(Note(title = title.ifEmpty { "Sem Titulo" }, text = text, date = getDataTime()))
+
                                 } else {
 
-                                    db.editNote(Note(id = id ,title = title, text = text, date = getDataTime()))
+                                    db.editNote(Note(id = id ,title = title.ifEmpty { "Sem Titulo" }, text = text, date = getDataTime()))
 
                                 }
 
@@ -246,7 +252,8 @@ fun EditOrAddScreen(
                            unfocusedContainerColor = MaterialTheme.colorScheme.background,
                            focusedIndicatorColor = MaterialTheme.colorScheme.background,
                            unfocusedIndicatorColor = MaterialTheme.colorScheme.background
-                       )
+                       ),
+                       singleLine = true
                    )
 
                    Spacer(Modifier.height(13.dp))
