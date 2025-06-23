@@ -4,11 +4,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -29,6 +37,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -221,7 +230,8 @@ fun EditOrAddScreen(
                Column(
                    verticalArrangement = Arrangement.Center,
                    horizontalAlignment = Alignment.CenterHorizontally,
-                   modifier = Modifier.fillMaxSize()
+                   modifier = Modifier
+                       .fillMaxSize()
                ) {
                    CircularProgressIndicator()
                }
@@ -231,8 +241,15 @@ fun EditOrAddScreen(
                Column(
                    modifier = Modifier
                        .fillMaxSize()
-                       .padding(paddingValues)
-                       .padding(10.dp)
+                       .padding(
+                           start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
+                           end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
+                           top = paddingValues.calculateTopPadding(),
+                           bottom = if (id == null) paddingValues.calculateBottomPadding() else 0.dp
+                       )
+                       .padding(horizontal = 10.dp)
+                       .imePadding()
+                       .verticalScroll(rememberScrollState())
                ) {
 
                    TextField(
