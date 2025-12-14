@@ -95,7 +95,7 @@ fun HomeScren(navController: NavController) {
                             },
                             overlineContent = {
                                 Text(
-                                    text = " ${getDataTime()}"
+                                    text = nota.date
                                 )
                             },
                             modifier = Modifier
